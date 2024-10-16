@@ -4,7 +4,6 @@ import 'package:wista/core/constants/app_colors.dart';
 import 'package:wista/core/constants/app_sizes.dart';
 import 'package:wista/core/extensions/screen_extension.dart';
 import 'package:wista/core/extensions/widget_extensions.dart';
-import 'package:wista/core/theme/app_typography.dart';
 import 'package:wista/pages/onboarding_page.dart';
 
 class LandingPage extends StatefulWidget {
@@ -100,7 +99,7 @@ class _LandingPageState extends State<LandingPage>
                 autoPlay: true,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).push(
+                    Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
                         builder: (context) => const OnboardingPage(),
                       ),

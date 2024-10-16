@@ -6,7 +6,7 @@ class AppThemeData {
   static ThemeData get lightTheme {
     return ThemeData(
       primarySwatch: Colors.blue,
-      primaryColor: Colors.blue,
+      primaryColor: AppColors.primaryColor,
       brightness: Brightness.light,
       scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,
       dividerColor: Colors.white54,

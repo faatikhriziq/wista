@@ -34,6 +34,12 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       height: AppSizes.buttonHeightLarge,
@@ -68,25 +74,38 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
                     Animate(
                       controller: _controller,
                       effects: const [ScaleEffect()],
-                      child: SvgPicture.asset(
-                        'assets/icons/${item.name}.svg',
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 100),
                         height: _selectedMenu == item
                             ? AppSizes.iconSizeMedium
                             : AppSizes.iconSize,
-                        width: AppSizes.iconSize,
+                        child: SvgPicture.asset(
+                          'assets/icons/${item.name}.svg',
+                          height: _selectedMenu == item
+                              ? AppSizes.iconSizeMedium
+                              : AppSizes.iconSize,
+                          width: AppSizes.iconSize,
+                        ),
                       ),
                     ),
                     Animate(
                       effects: const [ScaleEffect()],
-                      child: Visibility(
-                        visible: _selectedMenu == item ? true : false,
-                        child: Container(
-                          height: 4.0,
-                          width: AppSizes.iconSizeMedium + 4.0,
-                          decoration: BoxDecoration(
-                            color: AppColors.backgroundColor,
-                            borderRadius: BorderRadius.circular(
-                                AppSizes.borderRadiusMedium),
+                      child: AnimatedOpacity(
+                        duration: const Duration(milliseconds: 400),
+                        opacity: _selectedMenu == item ? 1.0 : 0.0,
+                        child: AnimatedScale(
+                          duration: const Duration(milliseconds: 400),
+                          scale: _selectedMenu == item ? 1.0 : 0.0,
+                          child: Container(
+                            height: 4.0,
+                            width: _selectedMenu == item
+                                ? AppSizes.iconSizeMedium + 4.0
+                                : 0,
+                            decoration: BoxDecoration(
+                              color: AppColors.backgroundColor,
+                              borderRadius: BorderRadius.circular(
+                                  AppSizes.borderRadiusMedium),
+                            ),
                           ),
                         ),
                       ),
